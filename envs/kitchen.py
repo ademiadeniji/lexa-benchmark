@@ -8,7 +8,8 @@ from d4rl.kitchen.kitchen_envs import KitchenMicrowaveKettleLightTopLeftBurnerV0
 
 
 class KitchenEnv(BenchEnv):
-  def __init__(self, action_repeat=1, use_goal_idx=False, log_per_goal=False,  control_mode='end_effector', width=64):
+  def __init__(self, action_repeat=1, use_goal_idx=False, log_per_goal=False,  control_mode='end_effector', width=64,
+    camera_distance=1.86, azimuth=90, elevation=-60):
 
     super().__init__(action_repeat, width)
     self.use_goal_idx = use_goal_idx
@@ -17,7 +18,7 @@ class KitchenEnv(BenchEnv):
       self._env =  KitchenMicrowaveKettleLightTopLeftBurnerV0(frame_skip=16, control_mode = control_mode, imwidth=width, imheight=width)
 
       self._env.sim_robot.renderer._camera_settings = dict(
-        distance=1.86, lookat=[-0.3, .5, 2.], azimuth=90, elevation=-60)
+        distance=camera_distance, lookat=[-0.3, .5, 2.], azimuth=azimuth, elevation=elevation)
 
     self.rendered_goal = False
     self._env.reset()

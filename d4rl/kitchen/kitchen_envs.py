@@ -89,9 +89,11 @@ class KitchenBase(KitchenTaskRelaxV1):
             return img
 
         else:
-            return np.concatenate(
-                [self.obs_dict["qp"], self.obs_dict["obj_qp"], self.obs_dict["goal"]]
-            )
+            # return np.concatenate(
+            #     [self.obs_dict["qp"], self.obs_dict["obj_qp"], self.obs_dict["goal"]]
+            # )
+            proprio = np.concatenate((qp, self.get_ee_pose(), self.get_ee_quat(),))
+            return proprio
 
     def _get_task_goal(self):
         new_goal = np.zeros_like(self.goal)
